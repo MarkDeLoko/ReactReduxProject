@@ -44,7 +44,7 @@ const LoginForm = () => {
           <Grid container spacing={8} alignItems="flex-end">
 
             <Grid item md={true} sm={true} xs={true}>
-              <TextField id="username" label="Password" type="password" fullWidth required/>
+              <TextField id="password" label="Password" type="password" fullWidth required/>
             </Grid>
           </Grid>
 

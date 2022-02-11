@@ -10,10 +10,7 @@ import ListItemText from '@mui/material/ListItemText';
 
 export default function AccountMenu() {
   const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
+    'Меню': false
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -32,7 +29,7 @@ export default function AccountMenu() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List >
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {['Home', 'Login', 'Sign Up'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemText sx={{marginLeft: '10px'}} primary={text} />
           </ListItem>
@@ -51,18 +48,16 @@ export default function AccountMenu() {
 
   return (
     <div>
-      {['Меню'].map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+        <React.Fragment>
+          <Button onClick={toggleDrawer('Меню', true)}>Меню</Button>
           <Drawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
+            open={state['Меню']}
+            onClose={toggleDrawer('Меню', false)}
           >
-            {list(anchor)}
+            {list('Меню')}
           </Drawer>
         </React.Fragment>
-      ))}
+
     </div>
   );
 }
