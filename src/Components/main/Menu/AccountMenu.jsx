@@ -9,8 +9,9 @@ import ListItemText from '@mui/material/ListItemText';
 
 
 export default function AccountMenu() {
+  const menu = 'Menu'
   const [state, setState] = React.useState({
-    'Меню': false
+    menu: false
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -18,7 +19,7 @@ export default function AccountMenu() {
       return;
     }
 
-    setState({ ...state, [anchor]: open });
+    setState({...state, [anchor]: open});
   };
 
   const list = (anchor) => (
@@ -28,18 +29,18 @@ export default function AccountMenu() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List >
-        {['Home', 'Login', 'Sign Up'].map((text, index) => (
+      <List>
+        {['Home', 'Login', 'Sign Up'].map((text) => (
           <ListItem button key={text}>
-            <ListItemText sx={{marginLeft: '10px'}} primary={text} />
+            <ListItemText sx={{marginLeft: '10px'}} primary={text}/>
           </ListItem>
         ))}
       </List>
-      <Divider />
+      <Divider/>
       <List>
-        {['Log out'].map((text, index) => (
+        {['Log out'].map((text) => (
           <ListItem button key={text}>
-            <ListItemText  sx={{marginLeft: '10px'}} primary={text} />
+            <ListItemText sx={{marginLeft: '10px'}} primary={text}/>
           </ListItem>
         ))}
       </List>
@@ -48,15 +49,15 @@ export default function AccountMenu() {
 
   return (
     <div>
-        <React.Fragment>
-          <Button onClick={toggleDrawer('Меню', true)}>Меню</Button>
-          <Drawer
-            open={state['Меню']}
-            onClose={toggleDrawer('Меню', false)}
-          >
-            {list('Меню')}
-          </Drawer>
-        </React.Fragment>
+      <React.Fragment>
+        <Button onClick={toggleDrawer(menu, true)}>{menu}</Button>
+        <Drawer
+          open={state[menu]}
+          onClose={toggleDrawer(menu, false)}
+        >
+          {list(menu)}
+        </Drawer>
+      </React.Fragment>
 
     </div>
   );

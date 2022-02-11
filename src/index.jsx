@@ -1,9 +1,9 @@
 import './index.less'
 import React from "react";
 import {render} from "react-dom";
-import App from "./Components/App";
+import App from "./App";
 import {Provider} from "react-redux";
-import {store} from "./Redux/reducers";
+import {store} from "./Redux/reducers/rootReducer";
 import {BrowserRouter} from "react-router-dom";
 
 
