@@ -1,24 +1,28 @@
 import React from 'react';
-import LoginContainer from "../../Containers/Auth/Login/LoginContainer";
 import AccountMenu from "../../Components/main/Menu/AccountMenu";
-import Button from "@mui/material/Button";
+import {Layout, Row} from "antd";
+import LoginForm from "../../Components/Forms/Login/LoginForm";
+import {getToken} from "../../Redux/actions/AuthAction";
+import {useDispatch} from "react-redux";
 
 
 const LoginPage = () => {
-  // con
-  function btnHandler(event) {
-    event.preventDefault();
-    // dispatch(getToken(inputFields))
+  const dispatch = useDispatch()
+  function handleSubmit(event) {
+    // event.preventDefault();
+    dispatch(getToken({username:'a', password:'b'}))
   }
 
   return (
-    <div>
-      <Button onClick={btnHandler}>
 
-      </Button>
-      <AccountMenu/>
-      <LoginContainer/>
+    <div style={{width: '80vw'}}>
 
+      <Layout>
+        <AccountMenu styles={{marginTop: '20'}}/>
+        <Row justify="center" align='middle' className="h100">
+          <LoginForm/>
+        </Row>
+      </Layout>
     </div>
   );
 };

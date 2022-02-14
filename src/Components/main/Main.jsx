@@ -1,7 +1,7 @@
 import React from 'react';
 import './main.less'
 import AccountMenu from "./Menu/AccountMenu";
-import Home from "../../Pages/Home/Home";
+import UserPage from "../../Pages/User/Home";
 
 
 const Main = () => {
@@ -15,7 +15,7 @@ const Main = () => {
   return (
     <div>
       <AccountMenu/>
-      <Home/>
+      <UserPage/>
     </div>
   );
 };

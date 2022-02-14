@@ -4,10 +4,11 @@ const defaultState = {
   isFetching: false,
   accessToken: null,
   refreshToken: null,
+  error: '',
 }
 
 export default function authReducer(state = defaultState, action) {
-  console.log('Auth reducer > ', action)
+  console.log('Auth reducer > ', state)
   switch (action.type) {
     case AUTH:
       return {
@@ -25,8 +26,10 @@ export default function authReducer(state = defaultState, action) {
       return {
         ...state,
         isFetching: false,
+        // error: action.payload,
         // Показать состояние ошибки
       }
+
     default:
       return state;
   }

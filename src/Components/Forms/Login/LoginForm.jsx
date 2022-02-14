@@ -1,15 +1,18 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import {Paper} from "@mui/material";
 import './LoginForm.less'
 import {useDispatch, useSelector} from "react-redux";
 import {setLoginFormFields} from "../../../Redux/actions/LoginActions";
 import {getToken} from "../../../Redux/actions/AuthAction";
+import {Button, Form, Input} from "antd";
+import {rules} from "../../../util/rules";
 
 const LoginForm = () => {
   const dispatch = useDispatch()
+
+  const isLoading = useSelector(state => {
+    const {authReducer} = state
+    return authReducer.isFetching
+  })
 
   const inputFields = useSelector(state => {
     const {loginReducer} = state
@@ -18,8 +21,10 @@ const LoginForm = () => {
 
 
   function handleSubmit(event) {
-    event.preventDefault();
+    // event.preventDefault();
+    // console.log(inputFields)
     dispatch(getToken(inputFields))
+
   }
 
   function handleUsernameChange(event) {
@@ -33,46 +38,35 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="login-form">
-      <Paper /*className={classes.padding}*/>
-        <div /*className={classes.margin}*/>
-          <Grid container spacing={8} alignItems="flex-end">
+    <Form
+      onFinish={handleSubmit}
+    >
+      <Form.Item
+        label="Username"
+        name="username"
+        rules={[rules.required('Please input your username!')]}
+      >
+        <Input onChange={handleUsernameChange}/>
+      </Form.Item>
 
-            <Grid item md={true} sm={true} xs={true}>
-              <TextField
-                id="username"
-                label="Username"
-                type="email"
-                onChange={handleUsernameChange}
-                fullWidth autoFocus required
-              />
-            </Grid>
-          </Grid>
-          <Grid container spacing={8} alignItems="flex-end">
-
-            <Grid item md={true} sm={true} xs={true}>
-              <TextField
-                id="password"
-                label="Password"
-                type="password"
-                onChange={handlePasswordChange}
-                fullWidth required
-              />
-            </Grid>
-          </Grid>
-
-          <Grid container justifyContent="center" style={{marginTop: '10px'}}>
-            <Button
-              onClick={handleSubmit}
-              variant="outlined"
-              color="primary"
-              style={{textTransform: "none"}}
-            >Login
-            </Button>
-          </Grid>
-        </div>
-      </Paper>
-    </div>
+      <Form.Item
+        label='Password'
+        name="password"
+        rules={[rules.required('Please input your password!')]}
+      >
+        <Input.Password onChange={handlePasswordChange}/>
+      </Form.Item>
+      <Form.Item
+        wrapperCol={{
+          offset: 8,
+          span: 16,
+        }}
+      >
+        <Button  type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
   )
 };
 
