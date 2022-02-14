@@ -18,7 +18,7 @@ const LoginPage = () => {
     <div style={{width: '80vw'}}>
 
       <Layout>
-        <AccountMenu styles={{marginTop: '20'}}/>
+        <AccountMenu />
         <Row justify="center" align='middle' className="h100">
           <LoginForm/>
         </Row>

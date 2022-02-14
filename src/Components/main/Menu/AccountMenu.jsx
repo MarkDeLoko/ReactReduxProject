@@ -61,7 +61,7 @@ export default function AccountMenu() {
 
   return (
     <div className='menu'>
-      <React.Fragment>
+
         <Button onClick={toggleDrawer(menu, true)}>{menu}</Button>
         <Drawer
           open={state[menu]}
@@ -74,7 +74,7 @@ export default function AccountMenu() {
             list(menu, ['Change Password'], ['Logout'])
           }
         </Drawer>
-      </React.Fragment>
+
 
     </div>
   );
