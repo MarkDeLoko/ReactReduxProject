@@ -1,10 +1,8 @@
-import {useSelector} from "react-redux";
+import {useAuthSelector} from "./selectors/UseAuthSelector";
 
 export const useAuth = () => {
-  return useSelector(state => {
-    const {authReducer} = state
-    // console.log(authReducer.accessToken, 'token')
-    return authReducer.accessToken
-  })
+  const {accessToken} = useAuthSelector()
+  return accessToken
+
 }
 

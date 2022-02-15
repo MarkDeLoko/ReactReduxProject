@@ -3,7 +3,7 @@ import {composeWithDevTools} from '@redux-devtools/extension'
 import authReducer from "./AuthReducer";
 import axiosMiddleware from "../Middlewares/axios";
 import {loginReducer} from "./LoginReducer";
-import thunk from "redux-thunk";
+// import thunk from "redux-thunk";
 
 
 const rootReducer = combineReducers({
@@ -11,4 +11,4 @@ const rootReducer = combineReducers({
   loginReducer
 })
 
-export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, axiosMiddleware)))
+export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(/*thunk, */axiosMiddleware)))

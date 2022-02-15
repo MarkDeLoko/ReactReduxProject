@@ -8,7 +8,7 @@ const defaultState = {
 }
 
 export default function authReducer(state = defaultState, action) {
-  console.log('Auth reducer > ', state)
+  // console.log('Auth reducer > ', state)
   switch (action.type) {
     case AUTH:
       return {

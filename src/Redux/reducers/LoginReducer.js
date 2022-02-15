@@ -6,7 +6,7 @@ const defaultState = {
 }
 
 export const loginReducer = (state = defaultState, action) => {
-  console.log('Login reducer >state> ', state)
+  // console.log('Login reducer >state> ', state)
   switch (action.type) {
     case LOGIN_FORM_FIELDS:
       return {

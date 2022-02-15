@@ -27,7 +27,7 @@ const LoginForm = () => {
     setTimeout(() => navigate('/personal', {replace: true}), 1000)
   }
 
-  function handleSubmit(event) {
+  function handleSubmit() {
     dispatch(getToken(inputFields))
     handleNavigate()
 

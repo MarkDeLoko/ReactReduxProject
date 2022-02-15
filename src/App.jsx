@@ -4,8 +4,11 @@ import {Navigate, Route, Routes} from "react-router-dom";
 import LoginPage from "./Pages/Auth/LoginPage";
 import SignupPage from "./Pages/Auth/SignupPage";
 import UserPage from "./Pages/User/UserPage";
-import {useSelector} from "react-redux";
 import RequireAuth from "./Components/hoc/RequireAuth";
+import RequireNoAuth from "./Components/hoc/RequireNoAuth";
+import {useAuthChanging} from "./Hooks/UseAuthChanging";
+import AccountMenu from "./Components/Menu/AccountMenu";
+import {Layout} from "antd";
 
 
 const App = () => {
@@ -16,18 +19,28 @@ const App = () => {
   // })
   // console.log(isAuth || 'nope')
   return (
-    <Routes>
-      <Route path="/personal" element={
-        <RequireAuth>
-          <UserPage/>
-        </RequireAuth>
-      }/>
-      <Route path='*' element={<Navigate to="/personal" replace/>}/>
-      <Route path="/login" element={<LoginPage/>}/>
-      <Route path="/signup" element={<SignupPage/>}/>
-      <Route path='/' element={<Navigate to="/login" replace/>}/>
-    </Routes>
+    <>
+      <div style={{width: '80vw'}}>
+        <Layout>
+          <AccountMenu/>
+          <Routes>
+            <Route path="/personal" element={
+              <RequireAuth>
+                <UserPage/>
+              </RequireAuth>
+            }/>
+            <Route path="/login" element={
+              <RequireNoAuth>
+                <LoginPage/>
+              </RequireNoAuth>
+            }/>
 
+            <Route path="/signup" element={<SignupPage/>}/>
+            <Route path='/' element={<Navigate to="/login" replace/>}/>
+          </Routes>
+        </Layout>
+      </div>
+    </>
   );
 };
 
