@@ -19,7 +19,7 @@ export default function authReducer(state = defaultState, action) {
       return {
         ...state,
         isFetching: false,
-        authToken: action.payload.data.accessToken,
+        accessToken: action.payload.data.accessToken,
         refreshToken: action.payload.data.refreshToken
       }
     case AUTH_FAIL:

@@ -5,9 +5,13 @@ import {setLoginFormFields} from "../../../Redux/actions/LoginActions";
 import {getToken} from "../../../Redux/actions/AuthAction";
 import {Button, Form, Input} from "antd";
 import {rules} from "../../../util/rules";
+import {useNavigate} from "react-router-dom";
+import {useAuth} from "../../../Hooks/UseAuth";
 
 const LoginForm = () => {
   const dispatch = useDispatch()
+  const auth = useAuth()
+  const navigate = useNavigate()
 
   const isLoading = useSelector(state => {
     const {authReducer} = state
@@ -19,11 +23,13 @@ const LoginForm = () => {
     return loginReducer
   })
 
+  const handleNavigate = () => {
+    setTimeout(() => navigate('/personal', {replace: true}), 1000)
+  }
 
   function handleSubmit(event) {
-    // event.preventDefault();
-    // console.log(inputFields)
     dispatch(getToken(inputFields))
+    handleNavigate()
 
   }
 
@@ -62,7 +68,7 @@ const LoginForm = () => {
           span: 16,
         }}
       >
-        <Button  type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit">
           Submit
         </Button>
       </Form.Item>
