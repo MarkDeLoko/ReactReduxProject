@@ -8,22 +8,35 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import {useNavigate} from "react-router-dom";
-import {useAuth} from "../../Hooks/UseAuth";
+import {useAuthSelector} from "../../Hooks/selectors/UseAuthSelector";
+import {useDispatch} from "react-redux";
+import {logout} from "../../Redux/actions/LogOutAction";
 
 
 export default function AccountMenu() {
-  const isAuth = useAuth()
+  const token = useAuthSelector()
   const navigate = useNavigate()
   const [menu, setMenu] = useState(false);
+  const dispatch = useDispatch()
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-    console.log(open)
+    // console.log(open)
     setMenu(open);
   };
   const listItemTextStyle = {marginLeft: '30px', marginRight: '50px'}
+
+  function handleLogOut() {
+    console.log('try logout')
+    dispatch(logout(token))
+    navigate('/login')
+  }
+
+  function handleChangePassword(){
+    console.log('try change pass')
+  }
 
   const list = (pointsTop, pointsEnd) => (
     <Box
@@ -33,7 +46,11 @@ export default function AccountMenu() {
       <List>
         {[...pointsTop].map((text) => (
           <ListItem
-            onClick={() => text === 'Login' ? navigate('/login') : navigate('/signup')}
+            onClick={() => text === 'Login'
+              ? navigate('/login')
+              : text === 'Change Password'
+                ? handleChangePassword()
+                : navigate('/signup')}
             button key={text}>
             <ListItemText sx={listItemTextStyle} primary={text}/>
           </ListItem>
@@ -42,7 +59,10 @@ export default function AccountMenu() {
       <Divider/>
       <List>
         {[...pointsEnd].map((text) => (
-          <ListItem button key={text}>
+          <ListItem
+            onClick={handleLogOut}
+            button key={text}
+          >
             <ListItemText sx={listItemTextStyle} primary={text}/>
           </ListItem>
         ))}
@@ -57,7 +77,7 @@ export default function AccountMenu() {
         open={menu}
         onClose={toggleDrawer(false)}
       >
-        {!isAuth
+        {!token
           ?
           list(['Login', 'Sign Up'], [])
           :

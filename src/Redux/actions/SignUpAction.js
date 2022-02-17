@@ -1,13 +1,13 @@
-import {AUTH} from "./ActionTypes";
+import { SIGNUP} from "./ActionTypes";
 
-export const auth = ({email, password}) => {
+export const signup = ({email, password}) => {
   // console.log(username, password)
   return {
-    type: AUTH,
+    type: SIGNUP,
     payload: {
       request: {
         method: 'POST',
-        url: '/login',
+        url: '/signup',
         data: {
           email,
           password,
@@ -16,4 +16,3 @@ export const auth = ({email, password}) => {
     }
   }
 }
-

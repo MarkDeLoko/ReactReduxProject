@@ -1,18 +1,23 @@
 import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import {useAuthSelector} from "./selectors/UseAuthSelector";
+import {checkAuth} from "../Redux/actions/CheckAuthAction";
 
 export const useAuthChanging = () => {
   const {accessToken} = useAuthSelector()
-  // console.log(accessToken)
+
+  console.log('Ghjdthrf')
   const navigate = useNavigate()
   useEffect(() => {
     if (accessToken) {
-      // console.log('fgeeh')
+      // if (!localStorage.getItem('token')){
+      //
+      //   localStorage.setItem('token', accessToken)
+      // }
       navigate('/personal')
     } else {
-      // console.log('aaaaaaaaaaaaaaaaaa')
       navigate('/')
+
     }
   }, [accessToken])
 }

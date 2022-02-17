@@ -1,17 +1,17 @@
 import {LOGIN_FORM_FIELDS} from "../actions/ActionTypes";
 
 const defaultState = {
-  username: '',
+  email: '',
   password: '',
 }
 
-export const loginReducer = (state = defaultState, action) => {
+export const fieldsReducer = (state = defaultState, action) => {
   // console.log('Login reducer >state> ', state)
   switch (action.type) {
     case LOGIN_FORM_FIELDS:
       return {
         ...state,
-        username: typeof action.payload.username === 'string' ? action.payload.username : state.username,
+        email: typeof action.payload.email === 'string' ? action.payload.email : state.email,
         password: typeof action.payload.password === 'string' ? action.payload.password : state.password,
       }
 
