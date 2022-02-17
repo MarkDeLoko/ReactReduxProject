@@ -13,12 +13,10 @@ import {useSignupChanging} from "./Hooks/UseSignupChanging";
 
 
 const App = () => {
-  // const isAuth = useSelector(state => {
-  //   const {authReducer} = state
-  //   console.log(authReducer.accessToken, 'token')
-  //   return authReducer.accessToken
-  // })
-  // console.log(isAuth || 'nope')
+  useAuthChanging();
+  useSignupChanging();
+  // useCheckAuth()
+
   return (
 
       <div style={{width: '80vw'}}>
