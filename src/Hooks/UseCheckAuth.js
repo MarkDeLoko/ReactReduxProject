@@ -7,14 +7,10 @@ export const useCheckAuth = () => {
   const {accessToken} = useAuthSelector()
   const dispatch = useDispatch()
   const token = localStorage.getItem('token')
-  if (!accessToken){
-    console.log('ацц токена нет')
+  if (!accessToken) {
     if (token) {
       dispatch(checkAuth(token))
     } else {
-      // localStorage.removeItem('token')
     }
   }
-
-
 }

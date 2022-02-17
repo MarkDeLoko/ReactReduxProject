@@ -1,6 +1,6 @@
 import React from 'react';
 import './app.less'
-import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import LoginPage from "./Pages/LoginPage";
 import SignupPage from "./Pages/SignupPage";
 import UserPage from "./Pages/UserPage";
@@ -15,32 +15,31 @@ import {useSignupChanging} from "./Hooks/UseSignupChanging";
 const App = () => {
   useAuthChanging();
   useSignupChanging();
-  // useCheckAuth()
 
   return (
-
-      <div style={{width: '80vw'}}>
-        <Layout>
-          <Layout.Content>
-            <AccountMenu/>
-            <Routes>
-              <Route path="/personal" element={
-                <RequireAuth>
-                  <UserPage/>
-                </RequireAuth>
-              }/>
-              <Route path="/login" element={
-                <RequireNoAuth>
-                  <LoginPage/>
-                </RequireNoAuth>
-              }/>
-              <Route path="/signup" element={<SignupPage/>}/>
-              <Route path='/' element={<Navigate to="/login" replace/>}/>
-            </Routes>
-          </Layout.Content>
-        </Layout>
-      </div>
-
+    <Layout style={{width: '80vw'}}>
+      <Layout.Content>
+        <AccountMenu/>
+        <Routes>
+          <Route path="/login" element={
+            <RequireNoAuth>
+              <LoginPage/>
+            </RequireNoAuth>
+          }/>
+          <Route path="/personal" element={
+            <RequireAuth>
+              <UserPage/>
+            </RequireAuth>
+          }/>
+          <Route path="/signup" element={
+            <RequireNoAuth>
+              <SignupPage/>
+            </RequireNoAuth>
+          }/>
+          <Route path='/' element={<Navigate to="/login" replace/>}/>
+        </Routes>
+      </Layout.Content>
+    </Layout>
   );
 };
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
@@ -11,10 +11,12 @@ import {useNavigate} from "react-router-dom";
 import {useAuthSelector} from "../../Hooks/selectors/UseAuthSelector";
 import {useDispatch} from "react-redux";
 import {logout} from "../../Redux/actions/LogOutAction";
+import {useAuthChanging} from "../../Hooks/UseAuthChanging";
+import {access} from "@babel/core/lib/config/validation/option-assertions";
 
 
 export default function AccountMenu() {
-  const token = useAuthSelector()
+  const {accessToken} = useAuthSelector()
   const navigate = useNavigate()
   const [menu, setMenu] = useState(false);
   const dispatch = useDispatch()
@@ -23,14 +25,13 @@ export default function AccountMenu() {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-    // console.log(open)
     setMenu(open);
   };
   const listItemTextStyle = {marginLeft: '30px', marginRight: '50px'}
 
   function handleLogOut() {
-    console.log('try logout')
-    dispatch(logout(token))
+    // console.log('try logout')
+    dispatch(logout(accessToken))
     navigate('/login')
   }
 
@@ -70,6 +71,7 @@ export default function AccountMenu() {
     </Box>
   );
 
+
   return (
     <div className='menu'>
       <Button onClick={toggleDrawer(true)}>Menu</Button>
@@ -77,7 +79,7 @@ export default function AccountMenu() {
         open={menu}
         onClose={toggleDrawer(false)}
       >
-        {!token
+        {!accessToken
           ?
           list(['Login', 'Sign Up'], [])
           :

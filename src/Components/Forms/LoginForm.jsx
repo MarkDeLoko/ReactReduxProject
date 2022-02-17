@@ -18,7 +18,6 @@ const LoginForm = () => {
 
 
   function handleSubmit() {
-    // console.log(inputFields)
     dispatch(auth(inputFields))
   }
 

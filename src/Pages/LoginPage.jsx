@@ -5,11 +5,9 @@ import './pages.less'
 
 const LoginPage = () => {
   return (
-
       <Row className="page">
         <LoginForm/>
       </Row>
-
   );
 };
 

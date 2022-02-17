@@ -5,8 +5,7 @@ const defaultState = {
   password: '',
 }
 
-export const fieldsReducer = (state = defaultState, action) => {
-  // console.log('Login reducer >state> ', state)
+export default function fieldsReducer (state = defaultState, action) {
   switch (action.type) {
     case LOGIN_FORM_FIELDS:
       return {
@@ -14,7 +13,6 @@ export const fieldsReducer = (state = defaultState, action) => {
         email: typeof action.payload.email === 'string' ? action.payload.email : state.email,
         password: typeof action.payload.password === 'string' ? action.payload.password : state.password,
       }
-
     default:
       return state;
   }

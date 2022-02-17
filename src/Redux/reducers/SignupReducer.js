@@ -10,7 +10,6 @@ const defaultState = {
 }
 
 export default function signupReducer(state = defaultState, action) {
-  // console.log('Auth reducer > ', state)
   switch (action.type) {
     case SIGNUP:
       return {
@@ -29,7 +28,6 @@ export default function signupReducer(state = defaultState, action) {
         ...state,
         signupError: true,
         isSignupFetching: false,
-        // error: action.payload,
         // Показать состояние ошибки
       }
 

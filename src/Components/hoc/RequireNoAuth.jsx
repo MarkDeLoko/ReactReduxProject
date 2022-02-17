@@ -4,7 +4,7 @@ import {useAuthSelector} from "../../Hooks/selectors/UseAuthSelector";
 
 const RequireNoAuth = ({children}) => {
   const location = useLocation()
-  const accessToken = useAuthSelector()
+  const {accessToken} = useAuthSelector()
   if (accessToken) {
     return <Navigate to='/personal' state={{from: location}} replace/>
   }

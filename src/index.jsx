@@ -16,9 +16,6 @@ render(
         <App/>
       </BrowserRouter>
     </PersistGate>
-
   </Provider>,
-
   document.getElementById("root")
-)
-;
+);

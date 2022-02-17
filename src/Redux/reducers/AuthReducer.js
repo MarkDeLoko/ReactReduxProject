@@ -5,7 +5,7 @@ import {
   CHECK_AUTH,
   CHECK_AUTH_FAIL,
   CHECK_AUTH_SUCCESS,
-  LOG_OUT, LOG_OUT_SUCCESS
+  LOG_OUT, LOG_OUT_SUCCESS, REHYDRATE
 } from "../actions/ActionTypes";
 
 const defaultState = {
@@ -34,9 +34,9 @@ export default function authReducer(state = defaultState, action) {
       return {
         ...state,
         isFetching: false,
-        // error: action.payload,
         // Показать состояние ошибки
       }
+
     case LOG_OUT:
       return {
         ...state,
