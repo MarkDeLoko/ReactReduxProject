@@ -8,8 +8,6 @@ export const useAuthChanging = () => {
   useEffect(() => {
     if (accessToken) {
       navigate('/personal')
-    } else {
-      navigate('/')
     }
   }, [accessToken])
 }

@@ -7,9 +7,9 @@ const UserForm = () => {
 
   // console.log(userEmail)
   return (
-    <div>
+    <div style={{fontSize:'30px'}}>
 
-          Hello, {userEmail}!
+          Добрый день, {userEmail.split('@')[0]}!
 
     </div>
   );

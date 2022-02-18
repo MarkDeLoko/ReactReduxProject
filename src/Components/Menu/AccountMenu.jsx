@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
@@ -11,8 +11,8 @@ import {useNavigate} from "react-router-dom";
 import {useAuthSelector} from "../../Hooks/selectors/UseAuthSelector";
 import {useDispatch} from "react-redux";
 import {logout} from "../../Redux/actions/LogOutAction";
-import {useAuthChanging} from "../../Hooks/UseAuthChanging";
-import {access} from "@babel/core/lib/config/validation/option-assertions";
+import {useModalSelector} from "../../Hooks/selectors/UseModalSelector";
+import {setModalActive} from "../../Redux/actions/ModalAction";
 
 
 export default function AccountMenu() {
@@ -20,7 +20,7 @@ export default function AccountMenu() {
   const navigate = useNavigate()
   const [menu, setMenu] = useState(false);
   const dispatch = useDispatch()
-
+  const modalSelector = useModalSelector()
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -36,8 +36,9 @@ export default function AccountMenu() {
   }
 
   function handleChangePassword(){
-    console.log('try change pass')
+    dispatch(setModalActive(true))
   }
+
 
   const list = (pointsTop, pointsEnd) => (
     <Box
@@ -74,7 +75,7 @@ export default function AccountMenu() {
 
   return (
     <div className='menu'>
-      <Button onClick={toggleDrawer(true)}>Menu</Button>
+      <Button style={{zIndex:1000}} onClick={toggleDrawer(true)}>Menu</Button>
       <Drawer
         open={menu}
         onClose={toggleDrawer(false)}

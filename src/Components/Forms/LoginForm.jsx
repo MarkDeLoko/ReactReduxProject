@@ -10,12 +10,8 @@ import {useFieldsSelector} from "../../Hooks/selectors/UseFieldsSelector";
 
 const LoginForm = () => {
   const dispatch = useDispatch()
-
   const {isFetching} = useAuthSelector();
-
-
   const inputFields = useFieldsSelector()
-
 
   function handleSubmit() {
     dispatch(auth(inputFields))
@@ -52,7 +48,6 @@ const LoginForm = () => {
     <Form
       {...formItemLayout}
       className="login-form"
-      // style={{width:'500px'}}
       onFinish={handleSubmit}
     >
       <Form.Item

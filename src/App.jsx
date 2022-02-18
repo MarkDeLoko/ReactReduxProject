@@ -10,16 +10,26 @@ import {useAuthChanging} from "./Hooks/UseAuthChanging";
 import AccountMenu from "./Components/Menu/AccountMenu";
 import {Layout} from "antd";
 import {useSignupChanging} from "./Hooks/UseSignupChanging";
+import Alert from "./Components/Alert";
+import {useErrorChanging} from "./Hooks/UseErrorChanging";
+import {useSignupInfoChanging} from "./Hooks/useSignupInfoChanging";
+import {useChangePassError} from "./Hooks/UseChangePassError";
+import {useChangePassInfo} from "./Hooks/UseChangePassInfo";
 
 
 const App = () => {
+  // useSignupChanging();
   useAuthChanging();
-  useSignupChanging();
+  useErrorChanging()
+  useSignupInfoChanging()
+  useChangePassError()
+  useChangePassInfo()
 
   return (
     <Layout style={{width: '80vw'}}>
       <Layout.Content>
         <AccountMenu/>
+        <Alert/>
         <Routes>
           <Route path="/login" element={
             <RequireNoAuth>

@@ -3,13 +3,11 @@ import {useNavigate} from "react-router-dom";
 import {useSignupSelector} from "./selectors/UseSignupSelector";
 
 export const useSignupChanging = () => {
-  const {signupError} = useSignupSelector()
+  const {signupStatus} = useSignupSelector()
   const navigate = useNavigate()
   useEffect(() => {
-    if (signupError) {
-      console.log(signupError)
-    } else {
+    if (!signupStatus) {
       navigate('/')
     }
-  }, [signupError])
+  }, [signupStatus])
 }

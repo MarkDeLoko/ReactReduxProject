@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Form, Input,} from 'antd';
 import {rules} from "../../utils/rules";
-import {setUserData, signup} from "../../Redux/actions/SignUpAction";
+import {signup} from "../../Redux/actions/SignUpAction";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 
@@ -40,13 +40,9 @@ const tailFormItemLayout = {
 const SignUpForm = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const onFinish = async (values) => {
+  const onFinish = (values) => {
     console.log('Received values of form: ', values);
-
-      dispatch(signup(values))
-
-
+    dispatch(signup(values))
   };
 
 

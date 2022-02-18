@@ -1,4 +1,4 @@
-import {SIGNUP} from "./ActionTypes";
+import {AUTH_ERROR, SIGNUP, SIGNUP_ERROR, SIGNUP_INFO} from "./ActionTypes";
 
 export const signup = ({email, password}) => {
   return {
@@ -15,3 +15,17 @@ export const signup = ({email, password}) => {
     }
   }
 }
+
+export function setSignupError(signupError) {
+  return {
+    type: SIGNUP_ERROR,
+    payload: signupError
+  }
+}
+export function setSignupInfo(signupinfo) {
+  return {
+    type: SIGNUP_INFO,
+    payload: signupInfo
+  }
+}
+

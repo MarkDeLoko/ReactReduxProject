@@ -1,12 +1,10 @@
-import {
-  SIGNUP,
-  SIGNUP_FAIL,
-  SIGNUP_SUCCESS
-} from "../actions/ActionTypes";
+import {SIGNUP, SIGNUP_ERROR, SIGNUP_FAIL, SIGNUP_INFO, SIGNUP_SUCCESS} from "../actions/ActionTypes";
 
 const defaultState = {
   isSignupFetching: false,
-  signupError: false,
+  signupStatus: false,
+  signupError: '',
+  signupInfo: ''
 }
 
 export default function signupReducer(state = defaultState, action) {
@@ -15,20 +13,32 @@ export default function signupReducer(state = defaultState, action) {
       return {
         ...state,
         isSignupFetching: true,
-        signupError: true
+        signupStatus: true
       }
     case SIGNUP_SUCCESS:
       return {
         ...state,
-        signupError: false,
+        signupStatus: false,
         isSignupFetching: false,
+        signupError: action.payload.data.success ? '' : action.payload.data.reason,
+        signupInfo: action.payload.data.success ? action.payload.data.signupInfo : ''
       }
     case SIGNUP_FAIL:
       return {
         ...state,
-        signupError: true,
+        signupStatus: true,
         isSignupFetching: false,
-        // Показать состояние ошибки
+
+      }
+    case SIGNUP_ERROR:
+      return {
+        ...state,
+        signupError: action.payload
+      }
+    case SIGNUP_INFO:
+      return {
+        ...state,
+        signupInfo: action.payload
       }
 
     default:
