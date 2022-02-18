@@ -1,10 +1,7 @@
-import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
+import {applyMiddleware, compose, createStore} from 'redux'
 import {composeWithDevTools} from '@redux-devtools/extension'
 import axiosMiddleware from "./Middlewares/axios";
-import fieldsReducer from "./reducers/FieldsReducer";
-import authReducer from "./reducers/AuthReducer";
-import signupReducer from "./reducers/SignupReducer";
-import {persistReducer, persistStore} from "redux-persist";
+import {persistStore} from "redux-persist";
 
 
 import {persistedReducer} from "./persistReducer";

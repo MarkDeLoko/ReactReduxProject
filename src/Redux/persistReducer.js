@@ -6,13 +6,11 @@ import signupReducer from "./reducers/SignupReducer";
 import storage from 'redux-persist/lib/storage';
 import modalReducer from "./reducers/ModalReducer";
 import changePasswordReducer from "./reducers/ChangePasswordReducer";
-// import autoMergeLevel4 from "redux-persist/es/stateReconciler/autoMergeLevel2";
 
 
 const persistConfig = {
   key: 'root',
   storage,
-  // stateReconciler: autoMergeLevel4
   blacklist: ['authReducer', 'fieldsReducer']
 };
 const authPersistConfig = {

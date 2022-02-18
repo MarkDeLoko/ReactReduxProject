@@ -14,6 +14,9 @@ export const CHECK_AUTH_FAIL = 'CHECK_AUTH_FAIL';
 export const CHECK_AUTH_SUCCESS = 'CHECK_AUTH_SUCCESS';
 
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const AUTH_INFO = 'AUTH_INFO';
+
+
 export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 export const SIGNUP_INFO = 'SIGNUP_INFO';
 

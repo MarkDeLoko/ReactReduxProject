@@ -5,7 +5,7 @@ const defaultState = {
 
 }
 
-export default function modalReducer (state = defaultState, action) {
+export default function modalReducer(state = defaultState, action) {
   switch (action.type) {
     case SHOW_MODAL:
       return {

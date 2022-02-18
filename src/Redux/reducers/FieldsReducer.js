@@ -5,7 +5,7 @@ const defaultState = {
   password: '',
 }
 
-export default function fieldsReducer (state = defaultState, action) {
+export default function fieldsReducer(state = defaultState, action) {
   switch (action.type) {
     case LOGIN_FORM_FIELDS:
       return {

@@ -1,15 +1,11 @@
 import {
-  CHANGE_PASSWORD, CHANGE_PASSWORD_ERROR, CHANGE_PASSWORD_INFO,
-  CHANGE_PASSWORD_SUCCESS,
-  SIGNUP,
-  SIGNUP_ERROR,
-  SIGNUP_FAIL,
-  SIGNUP_INFO,
-  SIGNUP_SUCCESS
+  CHANGE_PASSWORD,
+  CHANGE_PASSWORD_ERROR,
+  CHANGE_PASSWORD_INFO,
+  CHANGE_PASSWORD_SUCCESS
 } from "../actions/ActionTypes";
 
 const defaultState = {
-  // changePassSuccess: false,
   changePassInfo: '',
   changePassStatus: false,
   changePassError: ''
@@ -28,7 +24,6 @@ export default function changePasswordReducer(state = defaultState, action) {
         ...state,
         changePassInfo: action.payload.data.success ? action.payload.data.info : '',
         changePassError: !action.payload.data.success ? action.payload.data.error : '',
-        // changePassSuccess: action.payload.data.success,
         changePassStatus: false
       }
     case CHANGE_PASSWORD_ERROR:

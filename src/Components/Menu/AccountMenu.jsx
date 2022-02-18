@@ -33,7 +33,7 @@ export default function AccountMenu() {
     navigate('/login')
   }
 
-  function handleChangePassword(){
+  function handleChangePassword() {
     dispatch(setModalActive(true))
   }
 
@@ -72,7 +72,7 @@ export default function AccountMenu() {
 
   return (
     <div className='menu'>
-      <Button style={{zIndex:1000}} onClick={toggleDrawer(true)}>Меню</Button>
+      <Button style={{zIndex: 1000}} onClick={toggleDrawer(true)}>Меню</Button>
       <Drawer
         open={menu}
         onClose={toggleDrawer(false)}

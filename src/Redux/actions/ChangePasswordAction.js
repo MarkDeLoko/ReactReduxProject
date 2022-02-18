@@ -2,7 +2,6 @@ import {CHANGE_PASSWORD, CHANGE_PASSWORD_ERROR, CHANGE_PASSWORD_INFO} from "./Ac
 
 
 export const changePassword = (email, oldPassword, newPassword, accessToken) => {
-  // console.log(username, password)
   return {
     type: CHANGE_PASSWORD,
     payload: {

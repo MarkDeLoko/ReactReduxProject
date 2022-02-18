@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from "react-redux";
-import {setSignupInfo} from "../Redux/actions/AuthAction";
+import {setSignupInfo} from "../Redux/actions/SignUpAction";
 import {useSignupSelector} from "./selectors/UseSignupSelector";
 import {useNavigate} from "react-router-dom";
 

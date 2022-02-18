@@ -111,7 +111,7 @@ const SignUpForm = () => {
           }),
         ]}
       >
-        <Input.Password />
+        <Input.Password/>
       </Form.Item>
 
       <Form.Item {...tailFormItemLayout}>

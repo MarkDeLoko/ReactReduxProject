@@ -1,13 +1,13 @@
 import React from 'react';
-import {Card, Row} from "antd";
+import {Row} from "antd";
 import LoginForm from "../Components/Forms/LoginForm";
 import './pages.less'
 
 const LoginPage = () => {
   return (
-      <Row className="page">
-        <LoginForm/>
-      </Row>
+    <Row className="page">
+      <LoginForm/>
+    </Row>
   );
 };
 

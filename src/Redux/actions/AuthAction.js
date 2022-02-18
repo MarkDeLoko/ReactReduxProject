@@ -1,7 +1,6 @@
-import {AUTH, AUTH_ERROR, LOGIN_FORM_FIELDS, SIGNUP_INFO} from "./ActionTypes";
+import {AUTH, AUTH_ERROR, AUTH_INFO} from "./ActionTypes";
 
 export const auth = ({email, password}) => {
-  // console.log(username, password)
   return {
     type: AUTH,
     payload: {
@@ -16,6 +15,7 @@ export const auth = ({email, password}) => {
     }
   }
 }
+
 export function setAuthError(authError) {
   return {
     type: AUTH_ERROR,
@@ -23,9 +23,9 @@ export function setAuthError(authError) {
   }
 }
 
-export function setSignupInfo(signupInfo) {
+export function setAuthInfo(authInfo) {
   return {
-    type: SIGNUP_INFO,
-    payload: signupInfo
+    type: AUTH_INFO,
+    payload: authInfo
   }
 }

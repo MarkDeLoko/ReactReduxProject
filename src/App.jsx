@@ -9,12 +9,12 @@ import RequireNoAuth from "./Components/hoc/RequireNoAuth";
 import {useAuthChanging} from "./Hooks/UseAuthChanging";
 import AccountMenu from "./Components/Menu/AccountMenu";
 import {Layout} from "antd";
-import {useSignupChanging} from "./Hooks/UseSignupChanging";
 import Alert from "./Components/Alert";
 import {useErrorChanging} from "./Hooks/UseErrorChanging";
 import {useSignupInfoChanging} from "./Hooks/useSignupInfoChanging";
 import {useChangePassError} from "./Hooks/UseChangePassError";
 import {useChangePassInfo} from "./Hooks/UseChangePassInfo";
+import {useAuthInfoChanging} from "./Hooks/UseAuthInfoChanging";
 
 
 const App = () => {
@@ -24,6 +24,7 @@ const App = () => {
   useSignupInfoChanging()
   useChangePassError()
   useChangePassInfo()
+  useAuthInfoChanging()
 
   return (
     <Layout style={{width: '80vw'}}>

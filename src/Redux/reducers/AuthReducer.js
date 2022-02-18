@@ -1,22 +1,13 @@
-import {
-  AUTH, AUTH_ERROR,
-  AUTH_FAIL,
-  AUTH_SUCCESS,
-  CHECK_AUTH,
-  CHECK_AUTH_FAIL,
-  CHECK_AUTH_SUCCESS,
-  LOG_OUT,
-  LOG_OUT_SUCCESS
-} from "../actions/ActionTypes";
+import {AUTH, AUTH_ERROR, AUTH_FAIL, AUTH_INFO, AUTH_SUCCESS, LOG_OUT, LOG_OUT_SUCCESS} from "../actions/ActionTypes";
 
 const defaultState = {
   isFetching: false,
   accessToken: null,
+  authInfo: false,
   authError: '',
 }
 
 export default function authReducer(state = defaultState, action) {
-  // console.log('Auth reducer > ', state)
   switch (action.type) {
     case AUTH:
       return {
@@ -24,10 +15,10 @@ export default function authReducer(state = defaultState, action) {
         isFetching: true,
       }
     case AUTH_SUCCESS:
-      // console.log(action)
       return {
         ...state,
         accessToken: action.payload.data.success ? action.payload.data.accessToken : '',
+        authInfo: action.payload.data.success ? action.payload.data.authInfo : '',
         authError: !action.payload.data.success ? action.payload.data.reason : '',
         isFetching: false,
       }
@@ -55,23 +46,12 @@ export default function authReducer(state = defaultState, action) {
         isFetching: false,
         accessToken: null
       }
-    case CHECK_AUTH:
+    case AUTH_INFO:
       return {
         ...state,
-        isFetching: true,
+        authInfo: action.payload
       }
-    case CHECK_AUTH_SUCCESS:
-      return {
-        ...state,
-        isFetching: false,
-        accessToken: action.payload.data.accessToken
-      }
-    case CHECK_AUTH_FAIL:
-      return {
-        ...state,
-        isFetching: false,
-        accessToken: null
-      }
+
 
     default:
       return state;

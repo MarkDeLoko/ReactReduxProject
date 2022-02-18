@@ -39,9 +39,8 @@ const ChangePassModal = () => {
     <>
       <Modal title="Изменение пароля" visible={active} onOk={handleOk} onCancel={handleCancel}>
         <Form
-          className="login-form"
+          className="change-pass-loader"
         >
-
           <Form.Item
             label='Старый пароль'
             name="oldPassword"
@@ -52,9 +51,30 @@ const ChangePassModal = () => {
           <Form.Item
             label='Новый пароль'
             name="newPassword"
-            rules={[rules.required('Пожалуйста введите ваш новый пароль!')]}
+            rules={[
+              rules.required('Пожалуйста введите ваш новый пароль!'),
+              ({}) => ({
+                validator(_, value) {
+                  let withUpperSymb = false
+                  const stringValue = [...value]
+                  stringValue.forEach((symb) => {
+                      if (symb === symb.toUpperCase() && symb.match(/^[a-zа-яё]+$/i))
+                        withUpperSymb = true
+                    }
+                  )
+                  if (
+                    (3 < stringValue.length && stringValue.length < 11)
+                    && withUpperSymb
+                    || !(stringValue.length > 0)
+                  ) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error('Пароль должен содержать от 3 до 10 символов и 1 заглавную букву!'));
+                },
+              })
+            ]}
           >
-            <Input.Password />
+            <Input.Password/>
           </Form.Item>
           <Form.Item
             label='Подтверждение'

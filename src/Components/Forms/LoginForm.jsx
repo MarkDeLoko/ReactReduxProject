@@ -12,10 +12,11 @@ const LoginForm = () => {
   const dispatch = useDispatch()
   const {isFetching} = useAuthSelector();
   const {email, password} = useFieldsSelector()
+
   // dispatch(setLoginFormFields({email, password}))
 
   function handleSubmit() {
-    dispatch(auth({email,password}))
+    dispatch(auth({email, password}))
   }
 
 
