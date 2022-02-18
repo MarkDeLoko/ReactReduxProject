@@ -4,38 +4,11 @@ import {rules} from "../../utils/rules";
 import {signup} from "../../Redux/actions/SignUpAction";
 import {useDispatch} from "react-redux";
 import {useSignupSelector} from "../../Hooks/selectors/UseSignupSelector";
+import {useSignupFieldsSelector} from "../../Hooks/selectors/UseSignupFieldsSelector";
+import {debounce} from "lodash";
+import {setSignupFormFields} from "../../Redux/actions/SignupFieldsActions";
+import {formItemLayout, tailFormItemLayout} from "./Consts";
 
-
-const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 16,
-    },
-  },
-};
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
-  },
-};
 
 const SignUpForm = () => {
   const [form] = Form.useForm();
@@ -44,6 +17,20 @@ const SignUpForm = () => {
   const onFinish = (values) => {
     dispatch(signup(values))
   };
+  const {email, password, secondPassword} = useSignupFieldsSelector()
+
+  const handleEmailChange = debounce((event) => {
+    dispatch(setSignupFormFields({email: event.target.value}))
+  }, 200)
+
+  const handlePasswordChange = debounce((event) => {
+    dispatch(setSignupFormFields({password: event.target.value}))
+  }, 200)
+
+  const handleSecondPasswordChange = debounce((event) => {
+    dispatch(setSignupFormFields({secondPassword: event.target.value}))
+  }, 200)
+
 
   return (
     <Form
@@ -52,6 +39,11 @@ const SignUpForm = () => {
       className="signup-form"
       onFinish={onFinish}
       scrollToFirstError
+      initialValues={{
+        email: email,
+        password: password,
+        secondPassword: secondPassword
+      }}
     >
       <Form.Item
         name="email"
@@ -61,7 +53,7 @@ const SignUpForm = () => {
           rules.required('Please input your E-mail!'),
         ]}
       >
-        <Input/>
+        <Input onChange={handleEmailChange} />
       </Form.Item>
 
       <Form.Item
@@ -91,11 +83,11 @@ const SignUpForm = () => {
         ]}
         hasFeedback
       >
-        <Input.Password/>
+        <Input.Password onChange={handlePasswordChange}/>
       </Form.Item>
 
       <Form.Item
-        name="confirm"
+        name="secondPassword"
         label="Подтвердите"
         dependencies={['password']}
         hasFeedback
@@ -111,7 +103,7 @@ const SignUpForm = () => {
           }),
         ]}
       >
-        <Input.Password/>
+        <Input.Password onChange={handleSecondPasswordChange} />
       </Form.Item>
 
       <Form.Item {...tailFormItemLayout}>

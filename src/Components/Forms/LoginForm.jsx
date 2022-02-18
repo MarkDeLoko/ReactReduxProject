@@ -6,53 +6,34 @@ import {Button, Form, Input} from "antd";
 import {rules} from "../../utils/rules";
 import {debounce} from 'lodash'
 import {useAuthSelector} from "../../Hooks/selectors/UseAuthSelector";
-import {useFieldsSelector} from "../../Hooks/selectors/UseFieldsSelector";
+import {useLoginFieldsSelector} from "../../Hooks/selectors/UseLoginFieldsSelector";
+import {formItemLayout} from "./Consts";
 
 const LoginForm = () => {
   const dispatch = useDispatch()
   const {isFetching} = useAuthSelector();
-  const {email, password} = useFieldsSelector()
-
-  // dispatch(setLoginFormFields({email, password}))
+  const {email, password} = useLoginFieldsSelector()
 
   function handleSubmit() {
     dispatch(auth({email, password}))
   }
 
-
   const handleEmailChange = debounce((event) => {
-    // console.log('handle user  >> ', event.target.value)
     dispatch(setLoginFormFields({email: event.target.value}))
   }, 200)
 
   const handlePasswordChange = debounce((event) => {
-    // console.log('handle pass  >> ', event.target.value)
     dispatch(setLoginFormFields({password: event.target.value}))
   }, 200)
-  const formItemLayout = {
-    labelCol: {
-      xs: {
-        span: 24,
-      },
-      sm: {
-        span: 8,
-      },
-    },
-    wrapperCol: {
-      xs: {
-        span: 24,
-      },
-      sm: {
-        span: 16,
-      },
-    },
-  };
 
   return (
     <Form
       {...formItemLayout}
       className="login-form"
       onFinish={handleSubmit}
+      initialValues={{
+        email,
+      }}
     >
       <Form.Item
         name="email"
@@ -91,7 +72,7 @@ const LoginForm = () => {
           })
         ]}
       >
-        <Input.Password value={email} onChange={handlePasswordChange}/>
+        <Input.Password onChange={handlePasswordChange}/>
       </Form.Item>
       <Form.Item
         wrapperCol={{

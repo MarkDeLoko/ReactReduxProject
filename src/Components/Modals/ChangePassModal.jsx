@@ -5,14 +5,13 @@ import {useDispatch} from "react-redux";
 import {setModalActive} from "../../Redux/actions/ModalAction";
 import {rules} from "../../utils/rules";
 import {useAuthSelector} from "../../Hooks/selectors/UseAuthSelector";
-import {useFieldsSelector} from "../../Hooks/selectors/UseFieldsSelector";
+import {useLoginFieldsSelector} from "../../Hooks/selectors/UseLoginFieldsSelector";
 import {changePassword} from "../../Redux/actions/ChangePasswordAction";
 
 const ChangePassModal = () => {
-  // const [isModalVisible, setIsModalVisible] = useState(false);
   const {active} = useModalSelector()
   const dispatch = useDispatch()
-  const {email} = useFieldsSelector()
+  const {email} = useLoginFieldsSelector()
   const [password, setPassword] = useState('')
   const [oldPassword, setOldPassword] = useState('')
   const {accessToken} = useAuthSelector()
@@ -21,16 +20,12 @@ const ChangePassModal = () => {
     dispatch(setModalActive(false));
     dispatch(changePassword(email, oldPassword, password, accessToken))
   };
-
   const handleCancel = () => {
     dispatch(setModalActive(false));
   };
-
-
   function handlePasswordChange(e) {
     setPassword(e.target.value)
   }
-
   function handleOldPasswordChange(e) {
     setOldPassword(e.target.value)
   }

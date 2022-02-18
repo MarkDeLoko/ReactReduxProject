@@ -11,14 +11,13 @@ import AccountMenu from "./Components/Menu/AccountMenu";
 import {Layout} from "antd";
 import Alert from "./Components/Alert";
 import {useErrorChanging} from "./Hooks/UseErrorChanging";
-import {useSignupInfoChanging} from "./Hooks/useSignupInfoChanging";
+import {useSignupInfoChanging} from "./Hooks/UseSignupInfoChanging";
 import {useChangePassError} from "./Hooks/UseChangePassError";
 import {useChangePassInfo} from "./Hooks/UseChangePassInfo";
 import {useAuthInfoChanging} from "./Hooks/UseAuthInfoChanging";
 
 
 const App = () => {
-  // useSignupChanging();
   useAuthChanging();
   useErrorChanging()
   useSignupInfoChanging()

@@ -28,6 +28,7 @@ export default function signupReducer(state = defaultState, action) {
         ...state,
         signupStatus: true,
         isSignupFetching: false,
+        signupError: 'Ошибка'
 
       }
     case SIGNUP_ERROR:

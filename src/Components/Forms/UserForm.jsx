@@ -1,13 +1,12 @@
 import React from 'react';
-import {useFieldsSelector} from "../../Hooks/selectors/UseFieldsSelector";
+import {useLoginFieldsSelector} from "../../Hooks/selectors/UseLoginFieldsSelector";
 
 const UserForm = () => {
-  const userEmail = useFieldsSelector().email
+  const {email} = useLoginFieldsSelector()
 
-  // console.log(userEmail)
   return (
     <div style={{fontSize: '30px'}}>
-      Добрый день, {userEmail.split('@')[0]}!
+      Добрый день, {email.split('@')[0]}!
     </div>
   );
 };

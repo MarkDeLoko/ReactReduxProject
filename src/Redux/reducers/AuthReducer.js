@@ -25,6 +25,7 @@ export default function authReducer(state = defaultState, action) {
     case AUTH_FAIL:
       return {
         ...state,
+        authError: 'Ошибка',
         isFetching: false,
       }
 
