@@ -3,7 +3,6 @@ import {Button, Form, Input,} from 'antd';
 import {rules} from "../../utils/rules";
 import {signup} from "../../Redux/actions/SignUpAction";
 import {useDispatch} from "react-redux";
-import {useNavigate} from "react-router-dom";
 
 
 const formItemLayout = {
@@ -41,10 +40,8 @@ const SignUpForm = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch()
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
     dispatch(signup(values))
   };
-
 
   return (
     <Form
@@ -58,8 +55,8 @@ const SignUpForm = () => {
         name="email"
         label="E-mail"
         rules={[
-          rules.type('email', 'The input is not valid E-mail!'),
-          rules.required('Please input your E-mail!')
+          rules.typed('email', 'The input is not valid E-mail!'),
+          rules.required('Please input your E-mail!'),
         ]}
       >
         <Input/>
@@ -67,9 +64,28 @@ const SignUpForm = () => {
 
       <Form.Item
         name="password"
-        label="Password"
+        label="Пароль"
         rules={[
-          rules.required('Please input your password!')
+          rules.required('Пожалуйста введите ваш пароль!'),
+          ({}) => ({
+            validator(_, value) {
+              let withUpperSymb = false
+              const stringValue = [...value]
+              stringValue.forEach((symb) => {
+                  if (symb === symb.toUpperCase() && symb.match(/^[a-zа-яё]+$/i))
+                    withUpperSymb = true
+                }
+              )
+              if (
+                (3 < stringValue.length && stringValue.length < 11)
+                && withUpperSymb
+                || !(stringValue.length > 0)
+              ) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('Пароль должен содержать от 3 до 10 символов и 1 заглавную букву!'));
+            }
+          }),
         ]}
         hasFeedback
       >
@@ -78,23 +94,22 @@ const SignUpForm = () => {
 
       <Form.Item
         name="confirm"
-        label="Confirm Password"
+        label="Подтвердите"
         dependencies={['password']}
         hasFeedback
         rules={[
-          rules.required('Please input your password!'),
-
+          rules.required('Пожалуйста подтвердите ваш пароль!'),
           ({getFieldValue}) => ({
             validator(_, value) {
               if (!value || getFieldValue('password') === value) {
                 return Promise.resolve();
               }
-              return Promise.reject(new Error('The two passwords that you entered do not match!'));
+              return Promise.reject(new Error('Введенные вами пароли не совпадают!'));
             },
           }),
         ]}
       >
-        <Input.Password/>
+        <Input.Password />
       </Form.Item>
 
       <Form.Item {...tailFormItemLayout}>

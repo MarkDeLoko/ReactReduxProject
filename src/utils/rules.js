@@ -3,7 +3,7 @@ export const rules = {
     required: true,
     message,
   }),
-  type: (type, message) => ({
+  typed: (type, message) => ({
     type: type,
     message: message,
   })

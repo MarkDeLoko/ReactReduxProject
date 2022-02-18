@@ -11,16 +11,14 @@ import {useNavigate} from "react-router-dom";
 import {useAuthSelector} from "../../Hooks/selectors/UseAuthSelector";
 import {useDispatch} from "react-redux";
 import {logout} from "../../Redux/actions/LogOutAction";
-import {useModalSelector} from "../../Hooks/selectors/UseModalSelector";
 import {setModalActive} from "../../Redux/actions/ModalAction";
-
+import {CHANGE_PASSWORD, LOGIN, LOGOUT, SIGNUP} from "./Consts"
 
 export default function AccountMenu() {
   const {accessToken} = useAuthSelector()
   const navigate = useNavigate()
   const [menu, setMenu] = useState(false);
   const dispatch = useDispatch()
-  const modalSelector = useModalSelector()
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -48,9 +46,9 @@ export default function AccountMenu() {
       <List>
         {[...pointsTop].map((text) => (
           <ListItem
-            onClick={() => text === 'Login'
+            onClick={() => text === LOGIN
               ? navigate('/login')
-              : text === 'Change Password'
+              : text === CHANGE_PASSWORD
                 ? handleChangePassword()
                 : navigate('/signup')}
             button key={text}>
@@ -72,23 +70,20 @@ export default function AccountMenu() {
     </Box>
   );
 
-
   return (
     <div className='menu'>
-      <Button style={{zIndex:1000}} onClick={toggleDrawer(true)}>Menu</Button>
+      <Button style={{zIndex:1000}} onClick={toggleDrawer(true)}>Меню</Button>
       <Drawer
         open={menu}
         onClose={toggleDrawer(false)}
       >
         {!accessToken
           ?
-          list(['Login', 'Sign Up'], [])
+          list([LOGIN, SIGNUP], [])
           :
-          list(['Change Password'], ['Logout'])
+          list([CHANGE_PASSWORD], [LOGOUT])
         }
       </Drawer>
-
-
     </div>
   );
 }

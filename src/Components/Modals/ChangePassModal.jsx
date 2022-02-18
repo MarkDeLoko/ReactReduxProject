@@ -43,31 +43,31 @@ const ChangePassModal = () => {
         >
 
           <Form.Item
-            label='Old password'
+            label='Старый пароль'
             name="oldPassword"
-            rules={[rules.required('Please input old password!')]}
+            rules={[rules.required('Пожалуйста введите ваш действующий пароль!')]}
           >
             <Input.Password onChange={handleOldPasswordChange}/>
           </Form.Item>
           <Form.Item
-            label='New password'
+            label='Новый пароль'
             name="newPassword"
-            rules={[rules.required('Please input new password!')]}
+            rules={[rules.required('Пожалуйста введите ваш новый пароль!')]}
           >
             <Input.Password />
           </Form.Item>
           <Form.Item
-            label='Confirm password'
+            label='Подтверждение'
             name="secondPassword"
 
             rules={[
-              rules.required('Please confirm password!'),
+              rules.required('Пожалуйста подтвердите ваш новый пароль'),
               ({getFieldValue}) => ({
                 validator(_, value) {
                   if (!value || getFieldValue('newPassword') === value) {
                     return Promise.resolve();
                   }
-                  return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                  return Promise.reject(new Error('Введенные вами пароли не совпадают!'));
                 },
               }),
             ]}

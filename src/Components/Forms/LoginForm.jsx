@@ -11,11 +11,13 @@ import {useFieldsSelector} from "../../Hooks/selectors/UseFieldsSelector";
 const LoginForm = () => {
   const dispatch = useDispatch()
   const {isFetching} = useAuthSelector();
-  const inputFields = useFieldsSelector()
+  const {email, password} = useFieldsSelector()
+  // dispatch(setLoginFormFields({email, password}))
 
   function handleSubmit() {
-    dispatch(auth(inputFields))
+    dispatch(auth({email,password}))
   }
+
 
   const handleEmailChange = debounce((event) => {
     // console.log('handle user  >> ', event.target.value)
@@ -44,6 +46,7 @@ const LoginForm = () => {
       },
     },
   };
+
   return (
     <Form
       {...formItemLayout}
@@ -54,25 +57,40 @@ const LoginForm = () => {
         name="email"
         label="E-mail"
         rules={[
-          {
-            type: 'email',
-            message: 'The input is not valid E-mail!',
-          },
-          {
-            required: true,
-            message: 'Please input your E-mail!',
-          },
+          rules.typed('email', 'Ваш Email введен неправильно!!'),
+          rules.required('Пожалуйста введите ваш Email!')
         ]}
       >
         <Input onChange={handleEmailChange}/>
       </Form.Item>
 
       <Form.Item
-        label='Password'
+        label='Пароль'
         name="password"
-        rules={[rules.required('Please input your password!')]}
+        rules={[
+          rules.required('Пожалуйста введите ваш пароль!'),
+          ({}) => ({
+            validator(_, value) {
+              let withUpperSymb = false
+              const stringValue = [...value]
+              stringValue.forEach((symb) => {
+                  if (symb === symb.toUpperCase() && symb.match(/^[a-zа-яё]+$/i))
+                    withUpperSymb = true
+                }
+              )
+              if (
+                (3 < stringValue.length && stringValue.length < 11)
+                && withUpperSymb
+                || !(stringValue.length > 0)
+              ) {
+                return Promise.resolve();
+              }
+              return Promise.reject(new Error('Пароль должен содержать от 3 до 10 символов и 1 заглавную букву!'));
+            },
+          })
+        ]}
       >
-        <Input.Password onChange={handlePasswordChange}/>
+        <Input.Password value={email} onChange={handlePasswordChange}/>
       </Form.Item>
       <Form.Item
         wrapperCol={{
@@ -81,7 +99,7 @@ const LoginForm = () => {
         }}
       >
         <Button type="primary" htmlType="submit" loading={isFetching}>
-          Submit
+          Войти
         </Button>
       </Form.Item>
     </Form>
