@@ -12,7 +12,6 @@ import {
 const defaultState = {
   isFetching: false,
   accessToken: null,
-  refreshToken: null,
   authError: '',
 }
 

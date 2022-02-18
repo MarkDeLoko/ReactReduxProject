@@ -3,6 +3,7 @@ import {Button, Form, Input,} from 'antd';
 import {rules} from "../../utils/rules";
 import {signup} from "../../Redux/actions/SignUpAction";
 import {useDispatch} from "react-redux";
+import {useSignupSelector} from "../../Hooks/selectors/UseSignupSelector";
 
 
 const formItemLayout = {
@@ -39,6 +40,7 @@ const tailFormItemLayout = {
 const SignUpForm = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch()
+  const {isSignupFetching} = useSignupSelector();
   const onFinish = (values) => {
     dispatch(signup(values))
   };
@@ -113,7 +115,7 @@ const SignUpForm = () => {
       </Form.Item>
 
       <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={isSignupFetching}>
           Register
         </Button>
       </Form.Item>

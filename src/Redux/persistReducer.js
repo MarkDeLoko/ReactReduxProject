@@ -13,18 +13,23 @@ const persistConfig = {
   key: 'root',
   storage,
   // stateReconciler: autoMergeLevel4
-  blacklist: ['authReducer']
+  blacklist: ['authReducer', 'fieldsReducer']
 };
 const authPersistConfig = {
   key: 'authReducer',
   storage: storage,
   whitelist: ['accessToken']
 }
+const fieldsPersistConfig = {
+  key: 'fieldsReducer',
+  storage: storage,
+  whitelist: ['email']
+}
 
 
 const reducers = combineReducers({
   authReducer: persistReducer(authPersistConfig, authReducer),
-  fieldsReducer,
+  fieldsReducer: persistReducer(fieldsPersistConfig, fieldsReducer),
   signupReducer,
   modalReducer,
   changePasswordReducer
