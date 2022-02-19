@@ -1,7 +1,7 @@
 import axios from 'axios';
 import axiosMiddleware from 'redux-axios-middleware';
 
-const API_URL = 'http://localhost:3003/'
+const API_URL = 'https://protected-citadel-30757.herokuapp.com/'
 const clients = axios.create({
   baseURL: API_URL,
   responseType: 'json',

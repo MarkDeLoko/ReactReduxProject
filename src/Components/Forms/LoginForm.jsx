@@ -33,6 +33,7 @@ const LoginForm = () => {
       onFinish={handleSubmit}
       initialValues={{
         email,
+        password
       }}
     >
       <Form.Item
